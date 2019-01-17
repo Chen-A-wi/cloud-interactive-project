@@ -12,10 +12,12 @@ import java.io.InputStream;
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView mBmImage;
     String mId;
+    Cache mCache;
 
-    public DownloadImageTask(ImageView bmImage, String id) {
+    public DownloadImageTask(ImageView bmImage, String id, Cache cache) {
         this.mBmImage = bmImage;
         this.mId = id;
+        this.mCache = cache;
     }
 
     //異步背景執行
@@ -34,5 +36,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap result) {
         mBmImage.setImageBitmap(result);
+        mCache.addBitmapToMemoryCache(mId,result);
     }
 }

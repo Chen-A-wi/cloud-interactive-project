@@ -1,6 +1,7 @@
 package com.a_wi.cloudinteractive;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ public class ListAdapter extends BaseAdapter {
     Context mContext;
     ViewHolder mViewHolder;
     LayoutInflater mLayoutInflater;
+    Cache mCache;
 
     //    定義重用物件
     class ViewHolder {
@@ -27,6 +29,7 @@ public class ListAdapter extends BaseAdapter {
         this.mContext = context;
         this.mArrayList = arrayList;
         mLayoutInflater = LayoutInflater.from(context);
+        mCache = new Cache();
     }
 
     @Override
@@ -51,9 +54,7 @@ public class ListAdapter extends BaseAdapter {
 
             mViewHolder = new ViewHolder();
             mViewHolder.id1 = convertView.findViewById(R.id.tv_id1);
-
             mViewHolder.title1 = convertView.findViewById(R.id.tv_title1);
-
             mViewHolder.img1 = convertView.findViewById(R.id.imageView1);
 
             convertView.setTag(mViewHolder);
@@ -66,9 +67,18 @@ public class ListAdapter extends BaseAdapter {
         mViewHolder.id1.setText(listData.getId());
         mViewHolder.title1.setText(listData.getTitle());
 
-        new DownloadImageTask(mViewHolder.img1,listData.getId())
-                .execute(listData.getImgUrl());
+        loadBitmap(listData.getId(), mViewHolder.img1, listData);
 
         return convertView;
+    }
+
+    private void loadBitmap(String resId, ImageView imageView, ListData listData) {
+        Bitmap bitmap = mCache.getBitmapFromMemCache(resId);
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+        } else {
+            new DownloadImageTask(mViewHolder.img1, listData.getId(), mCache)
+                    .execute(listData.getImgUrl());
+        }
     }
 }

@@ -12,22 +12,22 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity implements ApiService.ServiceInterface {
-    GridView mGridView;
-    ApiService mApiService;
-    ListAdapter mListAdapter;
-    ArrayList<ListData> mListArrayList;
+    private GridView mGridView;
+    private ApiService mApiService;
+    private ListAdapter mListAdapter;
+    private ArrayList<ListData> mListArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        initObj();
+        initAdapter();
+
         mApiService = new ApiService();
         mApiService.mServiceInterface = this;
         mApiService.getApiInformation();
-
-        initObj();
-        initAdapter();
     }
 
     private void initObj() {

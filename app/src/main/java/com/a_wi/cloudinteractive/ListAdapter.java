@@ -12,11 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
-    ArrayList<ListData> mArrayList;
-    Context mContext;
-    ViewHolder mViewHolder;
-    LayoutInflater mLayoutInflater;
-    Cache mCache;
+    private ArrayList<ListData> mArrayList;
+    private Context mContext;
+    private ViewHolder mViewHolder;
+    private LayoutInflater mLayoutInflater;
+    private Cache mCache;
 
     //    定義重用物件
     class ViewHolder {

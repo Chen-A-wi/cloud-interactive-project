@@ -3,8 +3,8 @@ package com.a_wi.cloudinteractive;
 import org.json.JSONObject;
 
 public class ListData {
-    String mId, mTitle, mImgUrl;
-    JSONObject mInformationData;
+    private String mId, mTitle, mImgUrl;
+    private JSONObject mInformationData;
 
     public ListData(String id, String title, String imgUrl, JSONObject jsonObject) {
         setId(id);

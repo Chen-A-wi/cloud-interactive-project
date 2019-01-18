@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView mBmImage;
-    String mId;
-    Cache mCache;
+    private ImageView mBmImage;
+    private String mId;
+    private Cache mCache;
 
     public DownloadImageTask(ImageView bmImage, String id, Cache cache) {
         this.mBmImage = bmImage;

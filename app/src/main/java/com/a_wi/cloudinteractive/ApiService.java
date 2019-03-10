@@ -22,9 +22,9 @@ public class ApiService {
 
 //    定義Api回傳介面
     public interface ServiceInterface {
-        void ServiceInterfaceBackData(JSONObject object) throws JSONException;
+        void ServiceCallBackData(JSONObject object) throws JSONException;
 
-        void ServiceInterfaceBackDataError(String errorMessage, ApiName apiName);
+        void ServiceCallBackDataError(String errorMessage, ApiName apiName);
     }
 
     private static String mApiUri = "https://jsonplaceholder.typicode.com/photos";
@@ -53,24 +53,25 @@ public class ApiService {
                             if (objectResult instanceof JSONObject) {
                                 JSONObject object = new JSONObject(result);
                                 object.put("ApiName", apiName);
-                                mServiceInterface.ServiceInterfaceBackData(object);
+                                mServiceInterface.ServiceCallBackData(object);
                             } else if (objectResult instanceof JSONArray) {
                                 JSONArray jsonArray = new JSONArray(result);
                                 JSONObject object = new JSONObject();
                                 object.put("information", jsonArray);
                                 object.put("ApiName", apiName);
-                                mServiceInterface.ServiceInterfaceBackData(object);
+                                mServiceInterface.ServiceCallBackData(object);
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            mServiceInterface.ServiceCallBackDataError(String.valueOf(e), apiName);
                         }
                     }
 
                     @Override
                     public void onFailure(Call call, IOException e) {
                         e.printStackTrace();
-                        mServiceInterface.ServiceInterfaceBackDataError(String.valueOf(e), apiName);
+                        mServiceInterface.ServiceCallBackDataError(String.valueOf(e), apiName);
                     }
                 });
     }

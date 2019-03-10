@@ -68,7 +68,7 @@ public class Main2Activity extends AppCompatActivity implements ApiService.Servi
 
     //region ================================ ApiCallback ==========================================
     @Override
-    public void ServiceInterfaceBackData(JSONObject object) throws JSONException {
+    public void ServiceCallBackData(JSONObject object) throws JSONException {
         if (object != null) {
             switch (object.getString("ApiName")) {
                 case "getApiInformation":
@@ -79,7 +79,7 @@ public class Main2Activity extends AppCompatActivity implements ApiService.Servi
     }
 
     @Override
-    public void ServiceInterfaceBackDataError(String errorMessage, ApiService.ApiName apiName) {
+    public void ServiceCallBackDataError(String errorMessage, ApiService.ApiName apiName) {
         Toast.makeText(this, apiName + ": " + errorMessage, Toast.LENGTH_LONG).show();
     }
     //endregion

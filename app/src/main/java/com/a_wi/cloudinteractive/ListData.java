@@ -47,6 +47,5 @@ public class ListData {
     public void setInformation(JSONObject informationData) {
         this.mInformationData = informationData;
     }
-
     //endregion
 }
